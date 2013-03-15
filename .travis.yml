@@ -1,10 +1,8 @@
 language: ruby
 gemfile:
    - cookbooks/test/support/Gemfile
-script: bundle exec rake foodcritic
+script: rake -f cookbooks/Rakefile
 rvm:
   - "1.9.3"
-  - "1.9.2"
-  - jruby
   - ruby-head
   - ree
