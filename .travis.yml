@@ -1,4 +1,7 @@
-script: "rake -f cookbooks/Rakefile"
+language: ruby
+gemfile:
+   - cookbooks/test/support/Gemfile
+script: bundle exec rake foodcritic
 rvm:
   - "1.9.3"
   - "1.9.2"
