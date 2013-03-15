@@ -1,1 +1,1 @@
-this repository is the file which relatives of my chef environment.
+This repository is the file which relatives of my chef environment.
