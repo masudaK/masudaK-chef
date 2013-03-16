@@ -17,8 +17,8 @@ git "/home/#{owner_name}/.rbenv" do
 end
 
 directory "/home/#{owner_name}/.rbenv/plugins" do
-  user #{owner_name}
-  group #{owner_name}
+  user owner_name
+  group owner_name
   mode 0755
   action :create
 end
