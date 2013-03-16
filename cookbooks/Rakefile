@@ -1,19 +1,21 @@
 #!/usr/bin/env rake
 
-require 'rake/clean'
-CLOBBER.include("foodcritic")
+#require 'rake/clean'
+#CLOBBER.include("foodcritic")
 #task "cheftest" => ["init", "compile"]
 
 desc "Runs foodcritic linter"
 task :foodcritic do |t|
   puts "-- foodcritic #{t.name} running -- "
   if Gem::Version.new("1.9.2") <= Gem::Version.new(RUBY_VERSION.dup)
-    puts "-- Target dir: " + File.dirname(__FILE__)
-    temp_cookbook_dir= File.join(File.dirname(__FILE__), %w{tmp foodcritic cookbook})
-    puts "-- Sandbox dir: " + temp_cookbook_dir
-    prepare_foodcritic_sandbox(temp_cookbook_dir)
+    base_dir = File.dirname(__FILE__)
+    puts "-- Target dir: #{base_dir}"
+    temp_cookbook_dir = File.join("#{base_dir}", %w{tmp foodcritic cookbook})
+    puts "-- Sandbox dir: #{temp_cookbook_dir}"
+    prepare_foodcritic_workspace(temp_cookbook_dir)
 
-    sh "foodcritic --epic-fail any #{File.dirname(temp_cookbook_dir)}"
+    sh "foodcritic --epic-fail any #{temp_cookbook_dir}"
+
   else
     puts "WARN: foodcritic run is skipped as Ruby #{RUBY_VERSION} is < 1.9.2."
   end
@@ -23,15 +25,17 @@ task :default => 'foodcritic'
 
 private
 
-def prepare_foodcritic_sandbox(temp_cookbook_dir)
+def prepare_foodcritic_workspace(temp_cookbook_dir)
   base_dir = File.dirname(__FILE__)
   target_cookbooks_name = [ "rbenv", "test_recipe" ]
 
   FileUtils.rm_rf temp_cookbook_dir 
   FileUtils.mkdir_p temp_cookbook_dir
   target_cookbooks_name.each do |cookbook|
-    file_path = File.join(base_dir, cookbook, ".")
+    file_path = File.join(base_dir, cookbook)
     puts file_path
-    FileUtils.cp_r(file_path, temp_cookbook_dir) if File.directory?(file_path)
+    puts "-- coping: #{file_path}"
+    FileUtils.cp_r(file_path, File.join( temp_cookbook_dir, './' )) if File.directory?(file_path)
   end
 end
+

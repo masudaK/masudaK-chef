@@ -1,6 +1,6 @@
 name             'test_recipe'
-maintainer       'YOUR_COMPANY_NAME'
-maintainer_email 'YOUR_EMAIL'
+maintainer       'Kenchi MASUDA'
+maintainer_email 'masuken@gmail.com'
 license          'All rights reserved'
 description      'Installs/Configures test_recipe'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
