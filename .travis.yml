@@ -1,6 +1,6 @@
 language: ruby
 gemfile:
-   - cookbooks/test/support/Gemfile
+   - ./test/support/Gemfile
 script: rake -f cookbooks/Rakefile
 rvm:
   - "1.9.3"
