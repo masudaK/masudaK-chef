@@ -4,6 +4,6 @@ gemfile:
 script: rake -f cookbooks/Rakefile
 rvm:
   - "1.9.3"
-  - ree
 env:
+  - CHEF_VERSION=0.10.4
   - CHEF_VERSION=0.10.24
