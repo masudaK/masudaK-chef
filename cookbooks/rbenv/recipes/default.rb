@@ -7,25 +7,35 @@
 # All rights reserved - Do Not Redistribute
 #
 
-owner_name = 'masuda_kenichi'
+install_user_name = node["rbenv"]["install_user_name"]
 
-git "/home/#{owner_name}/.rbenv" do
+# git install
+package "git" do
+  action :install
+end
+
+git "/home/#{install_user_name}/.rbenv" do
+  user install_user_name
+  group install_user_name
   repository "https://github.com/sstephenson/rbenv.git"
   reference "master"
   action :checkout
-  not_if "test -d /home/#{owner_name}/.rbenv"
 end
 
-directory "/home/#{owner_name}/.rbenv/plugins" do
-  user owner_name
-  group owner_name
+# 必要なディレクトリ作成
+directory "/home/#{install_user_name}/.rbenv/plugins" do
+  user install_user_name
+  group install_user_name
   mode 0755
   action :create
+  recursive true
 end
 
-git "/home/#{owner_name}/.rbenv/plugins/ruby-build" do
+git "/home/#{install_user_name}/.rbenv/plugins/ruby-build" do
+  user install_user_name
+  group install_user_name
   repository "https://github.com/sstephenson/ruby-build.git"
   reference "master"
   action :checkout
-  not_if "test -d /home/#{owner_name}/.rbenv/plugins/ruby-build"
 end
+
