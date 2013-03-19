@@ -6,10 +6,18 @@ describe 'rbenv' do
   include MiniTest::Chef::Assertions
   include MiniTest::Chef::Context
   include MiniTest::Chef::Resources
+
   it 'installs git' do
     # minitest-chef-handler
-    package('git').must_be_installed
+    case "#{node[:platform_version]}" # node attribute would be get inside it block...
+    when "6.4"
+      package('git').must_be_installed.with(:version, "1.7.1-3.el6_4.1")
+    when "6.2"
+      package('git').must_be_installed.with(:version, "1.7.1-3.el6_4.1")
+    else
+    end
   end
+
   it "clone rbenv" do
     file("/home/vagrant/.rbenv/bin/rbenv").must_exist
   end
