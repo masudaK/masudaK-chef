@@ -8,10 +8,11 @@
 #
 
 install_user_name = node['rbenv']['install_user_name']
+git_version = node['git']['version']
 
 # git install 
 package "git" do
-  version "1.7.1-3.el6_4.1"
+  version git_version
   action :install
 end
 
