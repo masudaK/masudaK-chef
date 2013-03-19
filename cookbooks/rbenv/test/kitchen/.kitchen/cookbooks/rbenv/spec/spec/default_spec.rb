@@ -22,17 +22,14 @@ end
 # MAIN
 # ==================================================
 describe 'rbenv::default' do
+  let (:chef_run) { ChefSpec::ChefRunner.new.converge 'rbenv::default' }
 
   describe 'on a CentOS box' do
-    # set platform
-    let(:chef_run) {
-      runner = ChefSpec::ChefRunner.new()
-      runner.node.automatic_attrs['platform'] = 'centos'
-      runner.converge 'rbenv::default'
-      runner
-    }
-    describe "Package git" do
-      it_behaves_like 'Package', 'git', '1.7.1-3.el6_4.1'
+    before do
+      Fauxhai.mock(platform:'centos')
+    end
+    context 'when install' do
+      it { chef_run.should install_package_at_version 'git', '1.7.1-3.el6_4.1' }
     end
     #it 'should be cloned' do
     #  # TODO below change test way for scm resources
@@ -49,16 +46,9 @@ describe 'rbenv::default' do
   # end of describe 'on a CentOS box'
 
   describe 'on a Ubuntu box' do
-    # set platform
-    let(:chef_run) {
-      runner = ChefSpec::ChefRunner.new()
-      runner.node.automatic_attrs['platform'] = 'ubuntu'
-      runner.converge 'rbenv::default'
-      runner
-    }
-    #before do
-    #  Fauxhai.mock(platform:'ubuntu')
-    #end
+    before do
+      Fauxhai.mock(platform:'ubuntu')
+    end
     describe "Package git" do
       it_behaves_like 'Package', 'git', '1:1.7.10.4-1ubuntu1'
     end
