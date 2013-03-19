@@ -26,8 +26,8 @@ describe 'rbenv::default' do
   describe 'on a RHEL-based box 6.4' do
     let(:runner) do
       ChefSpec::ChefRunner.new do |node|
-        node.automatic_attrs[:platform] = 'centos'
-        node.automatic_attrs[:platform_version] = '6.4'
+        node.automatic_attrs['platform'] = 'centos'
+        node.automatic_attrs['platform_version'] = '6.4'
       end
     end
     describe "Package git" do
@@ -50,8 +50,8 @@ describe 'rbenv::default' do
   describe 'on a RHEL-based box 6.2' do
     let(:runner) do
       ChefSpec::ChefRunner.new do |node|
-        node.automatic_attrs[:platform] = 'centos'
-        node.automatic_attrs[:platform_version] = '6.2'
+        node.automatic_attrs['platform'] = 'centos'
+        node.automatic_attrs['platform_version'] = '6.2'
       end
     end
     describe "Package git" do

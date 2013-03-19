@@ -1,1 +1,1 @@
-default["rbenv"]["install_user_name"] = "vagrant"
+default['rbenv']['install_user_name'] = 'vagrant'

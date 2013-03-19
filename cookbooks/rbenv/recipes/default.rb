@@ -7,9 +7,9 @@
 # All rights reserved - Do Not Redistribute
 #
 
-install_user_name = node["rbenv"]["install_user_name"]
+install_user_name = node['rbenv']['install_user_name']
 
-# git install
+# git install 
 package "git" do
   version "1.7.1-3.el6_4.1"
   action :install
