@@ -1,23 +1,17 @@
 # encoding: UTF-8
+require 'open3'
+require 'rspec/expectations'
 
-前提(/^: "(.*?)"ができている$/) do |file|
-  check_file_presence([file], true)
+前提(/^: '(\/home\/vagrant\/\.rbenv\/bin\/rbenv)'ができている$/) do |file_path|
+  File.exist?(file_path).should be_true
 end
 
-ならば(/^: rbenvコマンドが使えるようになっている$/) do
-  run_interactive(unescape('rbenv'))
-end
-
-前提(/^: "(.*?)"と実行する$/) do |cmd|
-  @execute_command='ruby -v'
-  unless @execute_command.nil?
-    steps %Q{ When I run `#{@execute_command} "#{cmd}"` }
-  else
-    @execute_failed=true
-    raise "No input command specified"
+もし(/^: '(\/home\/vagrant\/\.rbenv\/bin\/rbenv \-v)'を実行する$/) do |cmd|
+  Open3.popen3(cmd) do |stdin, stdout, stderr|
+    @cmd_stdout =  stdout.readline
   end
 end
 
-ならば(/^: 終了ステータスが(\d+)だ$/) do |expected|
-  assert_partial_output(expected, all_output)
+ならば(/^: 出力に以下が含まれている$/) do |string|
+  @cmd_stdout.should match('rbenv')
 end
