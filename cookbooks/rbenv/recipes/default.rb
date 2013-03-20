@@ -9,6 +9,7 @@
 
 install_user_name = node['rbenv']['install_user_name']
 git_version = node['git']['version']
+platform = node['platform']
 
 # git install 
 package "git" do
@@ -24,7 +25,7 @@ git "/home/#{install_user_name}/.rbenv" do
   action :checkout
 end
 
-# 必要なディレクトリ作成
+# need for clone ruby-build
 directory "/home/#{install_user_name}/.rbenv/plugins" do
   user install_user_name
   group install_user_name
@@ -41,3 +42,10 @@ git "/home/#{install_user_name}/.rbenv/plugins/ruby-build" do
   action :checkout
 end
 
+# override bashr
+template "/home/#{install_user_name}/.bashrc" do
+  source "#{platform}-bashrc.erb"
+  owner install_user_name
+  group install_user_name
+  mode "0644"
+end

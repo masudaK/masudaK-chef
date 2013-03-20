@@ -18,6 +18,11 @@ shared_examples 'Directory' do |dir_path, dir_owner, dir_group, dir_mode|
   end
 end
 
+shared_examples 'Template' do |file_path, match_char|
+  context 'when create' do
+    it { expect(chef_run).to create_file_with_content "#{file_path}","#{match_char}" }
+  end
+end
 # ==================================================
 # MAIN
 # ==================================================
@@ -45,6 +50,9 @@ describe 'rbenv::default' do
     #  # TODO below change test way for scm resources
     #  expect(chef_run).to create_directory "/home/vagrant/.rbenv"
     #end
+    describe "Template .bashrc" do
+      it_behaves_like 'Template', '/home/vagrant/.bashrc', 'rbenv'
+    end
   end
   # end of describe 'on a CentOS box'
 
@@ -64,6 +72,9 @@ describe 'rbenv::default' do
     end
     describe "Directory ruby-build" do
       it_behaves_like 'Directory', '/home/vagrant/.rbenv/plugins', 'vagrant', 'vagrant', 0755
+    end
+    describe "Template .bashrc" do
+      it_behaves_like 'Template', '/home/vagrant/.bashrc', 'rbenv'
     end
   end # end of describe 'on a Ubuntu box'
 
