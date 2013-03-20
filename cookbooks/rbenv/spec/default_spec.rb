@@ -1,5 +1,4 @@
 require 'chefspec'
-require 'fauxhai'
 
 # ==================================================
 # shared_exaples
@@ -64,9 +63,6 @@ describe 'rbenv::default' do
       runner.converge 'rbenv::default'
       runner
     }
-    #before do
-    #  Fauxhai.mock(platform:'ubuntu')
-    #end
     describe "Package git" do
       it_behaves_like 'Package', 'git', '1:1.7.10.4-1ubuntu1'
     end

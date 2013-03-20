@@ -4,7 +4,7 @@
 #
 # Copyright 2013, Kenichi MASUDA
 #
-# All rights reserved - Do Not Redistribute
+# All rights reserved.
 #
 
 install_user_name = node['rbenv']['install_user_name']
