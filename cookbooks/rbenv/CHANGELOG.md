@@ -2,6 +2,10 @@
 
 This file is used to list changes made in each version of rbenv.
 
+## 1.0.0:
+
+* Initial release of rbenv
+
 ## 0.1.0:
 
 * Initial release of rbenv

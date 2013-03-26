@@ -6,6 +6,10 @@ Description
 ===========
 The cookbooks is worked with some tests are rspec, minitest and so on.
 
+Current Release
+===========
+1.0.0: public release
+
 TODO
 ===========
 *
